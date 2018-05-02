@@ -1,0 +1,244 @@
+createdAt: "2018-04-03T09:30:27.345Z"
+updatedAt: "2018-04-16T08:18:40.179Z"
+type: "MARKDOWN_NOTE"
+folder: "77096f3453baf4ea8d77"
+title: "Pandas導入"
+content: '''
+  # Pandas導入
+  
+  準備：
+  + Python
+  + Pandas
+  + Numpy
+  
+  
+  ```py
+  import pandas as pd
+  import numpy as np
+  ```
+  
+  参照：
+  + [Pandas Cheat Sheet](https://github.com/pandas-dev/pandas/blob/master/doc/cheatsheet/Pandas_Cheat_Sheet.pdf)
+  
+  ## データを作成、読み込み、書き込み
+  
+  ### DataFrame作成
+  
+  ![](https://i.imgur.com/Ax3pp2A.png)
+  
+  ```python
+  # create a dataframe
+  df = pd.DataFrame({
+      'Apples': [30],
+      'Bananas': [21]
+  })
+  ```
+  
+  ![](https://i.imgur.com/CHPn7ZF.png)
+  
+  ```python
+  # create a dataframe with index
+  df = pd.DataFrame({
+      'Apples': [35,41],
+      'Bananas': [21, 34]
+  }, index=['2017 Sales', '2018 Sales'])
+  ```
+  
+  ### Series作成
+  
+  以下のよう`Series`を作成
+  
+  ```
+  Flour     4 cups
+  Milk       1 cup
+  Eggs     2 large
+  Spam       1 can
+  Name: Dinner, dtype: object
+  ```
+  
+  ```python
+  sr = pd.Series(
+      ['4 cups', '1 cup', '2 large', '1 can'],
+      index=['Flour', 'Milk', 'Eggs', 'Spam']
+  )
+  ```
+  
+  ### Csvファイル読み込み
+  
+  ```python
+  # Read csv file with first column is index
+  df = pd.read_csv('../path/to/file.csv', index_col=0)
+  ```
+  
+  ### Xslファイル読み込み
+  
+  ```python
+  # Read excel file from sheet 1
+  df = pd.read_excel('../path/to/excel.xsl', 'sheet 1')
+  ```
+  
+  ### Sqliteファイル読み込み
+  
+  ```python
+  # using sqlite3 lib
+  import sqlite3
+  # need initial connection for sqlite
+  cnx = sqlite3.connect('../path/to/sqlfile.sqlite')
+  # query from db
+  df = pd.read_sql_query('SELECT * FROM tables_name', cnx)
+  ```
+  
+  ### データ書き込み
+  
+  ```python
+  # save to csv
+  df.to_csv('../path/to/new/file.csv')
+  
+  # save to excel
+  df.to_excel('../path/to/file.xsl')
+  ```
+  
+  ## インデックス、選択、アサイン
+  
+  ### コラムのデータ選択
+  
+  ```python
+  # select column col1 from dataframe
+  df['col1']
+  
+  # select first row of column col1
+  df['col1'][0]
+  
+  # select first 10 rows from column col1
+  df['col1'][0:10]
+  # or using loc
+  df.loc[0:9, 'col1']
+  # or using iloc
+  df.iloc[0:10, index_of_col1]
+  
+  # select col1 where col1 = xxx
+  df[df['col1'] == 'xxx']['col1']
+  
+  # select col1 where col1 = xxx and col2 === yyy
+  # or |
+  # and &
+  df[(df['col1'] == 'xxx') & (df['col2'] === 'yyy')]['col1']
+  ```
+  
+  
+  ### ローのデータ選択
+  
+  ```python
+  # select first row of dataframe
+  # using loc
+  df.loc[0]
+  # using iloc
+  df.iloc[0]
+  
+  # select rows with index
+  # for example select row with index 1, 2, 3, 6
+  df.iloc[[1,2,3,6]]
+  # or using loc
+  df.loc[[1,2,3,6]]
+  
+  # select only columns col1, col2
+  df.loc[[1, 2, 3, 6], ['col1', 'col2']]
+  ```
+  
+  ## 合計、マップデータ
+  
+  ### 中央値(median)
+  
+  ```python
+  # median of column col1 in dataframe
+  df['col1'].median()
+  ```
+  
+  ### ユニークな値(unique)
+  
+  ```python
+  # find all unique data of column col1
+  df['col1'].unique()
+  ```
+  
+  ### よく出る値(value_counts)
+  
+  ```python
+  # what values is appear more offen in column col1
+  df['col1'].value_counts()
+  ```
+  
+  ### コラムとしてメッソド適用(apply)
+  
+  ```python
+  # add 1 for each cell in column col1
+  def addOne(source):
+    return source + 1
+  
+  df['col1'].apply(addOne)
+  # or using lambda
+  df['col1'].apply(lambda x: x + 1)
+  ```
+  
+  ## グループ、ソート
+  
+  ### コラムを元にグループ
+  
+  ```python
+  # show number of records group by col1
+  df.groudby(['col1']).size()
+  
+  # group by col1, show median of col2 for each group
+  df.groupby(['col1']).col2.median()
+  
+  # group by col1, show median, sum of col2 for each group
+  df.groupby(['col1']).col2.agg['median', 'sum']
+  
+  # multiple index and sorting desc
+  df.groupby(['col1', 'col2']).col3.agg['min', 'max'].sort_values(by=['min', 'max'], ascending=False)
+  ```
+  
+  ## データタイプとミスデータ
+  
+  ### データタイプチェック
+  
+  ```python
+  # check col1's datatype
+  df.col1.dtypes
+  df['col1'].dtypes
+  
+  # check multiples cols
+  df[['col1', 'col2']].dtypes
+  ```
+  
+  ### データタイプ更新
+  
+  ```python
+  # change col1 datatype to integer
+  df.col1 = df.col1.astype(int)
+  ```
+  
+  ### コラムのミスデータ検索
+  
+  ```python
+  # find missing values via column col1 and its orcurrs time
+  df.col1.fillna('N/A').value_counts()
+  
+  # check is there missing value via column col1
+  df.col1.isnull().value_counts()
+  
+  # replace value ? to N/A via col1
+  df.col1.replace("?", "N/A")
+  ```
+  
+'''
+tags: [
+  "pandas"
+  "python"
+  "tutorial"
+  "newbie"
+  "data-science"
+  "data"
+]
+isStarred: false
+isTrashed: false

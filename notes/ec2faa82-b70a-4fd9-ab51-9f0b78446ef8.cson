@@ -1,0 +1,67 @@
+createdAt: "2018-04-27T02:42:37.017Z"
+updatedAt: "2018-04-27T03:50:03.276Z"
+type: "MARKDOWN_NOTE"
+folder: "9c80aecbf211e79d6a30"
+title: "導入"
+content: '''
+  # 導入
+  
+  data preprocessing
+  + biến không phụ thuộc (undependence variable)
+  + biến phụ thuộc
+  + dummy biến -> trap
+    + bị lặp lại biến -> luôn trừ đi 1 biến dummy
+  
+  
+  
+  p-value là gì
+  + là con số xác suất (probability value)
+  + là tỉ lệ mệnh đề giả định (kết quả không mong muốn, không chính xác) được loại bỏ
+  + số càng nhỏ càng tốt
+  + common value 0.05 (nhỏ hơn 0.05 thì có thể kết luận mệnh đề giả định là sai ->  bác bỏ)
+  
+  xây dựng model
+  tìm ra mối quan hệ giữa biến không phụ thuộc và biến phụ thuộc
+  
+  5 method for buiding model
+  
+  + all-in
+  + Stepwise Regression
+    + backward elimination
+    + forward selection
+    + bidirectional elimination
+  + score comparision
+  
+  ## all-in
+  + do not have choise
+  + already known => knowleadge
+  + prepare for backward elimination
+  
+  ## backward elimination
+  1. Select significance level (0.05)
+  2. fit all possible prefictor
+  3. predictor with highest P-value if P > S => remove variable and repeat (3) else end
+  
+  ## forward elimination
+  1. Select significance level (0.05)
+  2. fil simple regression with lowest P value
+  3. predictor with lowest P value if P < SL -> add to model end end => keep previous model
+  
+  ## bidirectional elimination
+  backward  + forward
+  
+  ## all possible models
+  1. test all possible regession
+  2. 2^N - 1 models
+  2. choose the best one
+  
+  
+'''
+tags: [
+  "ML"
+  "AI"
+  "predict"
+  "regression"
+]
+isStarred: false
+isTrashed: false

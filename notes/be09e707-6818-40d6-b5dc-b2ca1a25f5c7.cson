@@ -1,0 +1,33 @@
+createdAt: "2018-04-27T02:19:18.736Z"
+updatedAt: "2018-04-27T02:27:28.147Z"
+type: "MARKDOWN_NOTE"
+folder: "61552bb2a8f6e6aac710"
+title: "Ý tưởng"
+content: '''
+  # Ý tưởng
+  
+  > Dựa theo mô hình scrum để làm tool quản lý dự án
+  > 
+  
+  ## Triển khai
+  
+  + Tìm hiểu rõ scum => học về scrum
+    + từng người trong team tự tìm hiểu, lần tiếp theo gặp mặt sẽ chia sẻ và đúc kết ra những điểm chính, mấu chốt
+  + Thu thập dữ liệu
+    + Khi làm dự án, những vấn đề của các tool đang dùng
+    + làm survey để hỏi ý kiến bạn bè, hoặc những người có kinh nghiệm (Mong muốn tool quản lý những gì, thời gian, công việc, tiến độ)
+  
+  + Nghiên cứu công nghệ
+    + ngôn ngữ
+    + server
+    + host
+    + quy trình
+    + quản lý bug, log, thống kê
+    + nền tản: Web, ios, android
+    + kết hợp với các tool hiện tại: slack, ...
+    + 
+  + 
+'''
+tags: []
+isStarred: false
+isTrashed: false
